@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let pinching = false;
         let startDistance = 0;
         let startCols = savedCols || 3;
+        let lastRatio = 1;
 
         const getDistance = (touches) => {
             const [a, b] = touches;
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.touches.length === 2) {
                 pinching = true;
                 startDistance = getDistance(e.touches);
+                lastRatio = 1;
                 startCols = parseFloat(getComputedStyle(grid).getPropertyValue('--grid-cols')) || 3;
                 grid.style.transition = 'none';
                 grid.style.transformOrigin = 'center center';
@@ -36,30 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.addEventListener('touchmove', (e) => {
             if (!pinching || e.touches.length !== 2) return;
 
-            const ratio = getDistance(e.touches) / startDistance;
+            lastRatio = getDistance(e.touches) / startDistance;
 
-            // Purely visual feedback during the gesture — a smooth scale,
-            // not a fractional column count (which CSS repeat() can't render).
-            const liveScale = Math.min(1.6, Math.max(0.6, ratio));
+            const liveScale = Math.min(1.6, Math.max(0.6, lastRatio));
             grid.style.transform = `scale(${liveScale})`;
 
             e.preventDefault();
         }, { passive: false });
 
-        const endPinch = (e) => {
+        const endPinch = () => {
             if (!pinching) return;
             pinching = false;
 
-            // Figure out the final ratio from whichever touch data is available on release.
-            const touches = e.changedTouches && e.changedTouches.length === 2
-                ? e.changedTouches
-                : null;
-            const endDistance = touches ? getDistance(touches) : startDistance;
-            const ratio = endDistance / startDistance;
-
-            // Spreading fingers apart (ratio > 1) = zoom in = fewer, bigger cards (down to 1).
-            // Pinching fingers together (ratio < 1) = zoom out = more, smaller cards (up to 5).
-            const newCols = Math.min(MAX_COLS, Math.max(MIN_COLS, Math.round(startCols / ratio)));
+            // Use the last ratio observed during the gesture — touchend's
+            // own touch data is unreliable here since fingers lift one at a time.
+            const newCols = Math.min(MAX_COLS, Math.max(MIN_COLS, Math.round(startCols / lastRatio)));
 
             grid.style.transition = 'transform 0.2s ease';
             grid.style.transform = 'scale(1)';
