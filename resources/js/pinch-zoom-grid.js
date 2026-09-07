@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const MIN_COLS = 2;
+    const MIN_COLS = 1;
     const MAX_COLS = 5;
     const STORAGE_KEY = 'gf-pinball-grid-cols';
 
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 startDistance = getDistance(e.touches);
                 startCols = parseFloat(getComputedStyle(grid).getPropertyValue('--grid-cols')) || 3;
                 grid.style.transition = 'none';
+                grid.style.transformOrigin = 'center center';
             }
         }, { passive: true });
 
@@ -37,25 +38,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const ratio = getDistance(e.touches) / startDistance;
 
-            // Spreading fingers apart (ratio > 1) = zoom in = fewer, bigger cards.
-            // Pinching fingers together (ratio < 1) = zoom out = more, smaller cards.
-            const liveCols = Math.min(MAX_COLS, Math.max(MIN_COLS, startCols / ratio));
-            grid.style.setProperty('--grid-cols', liveCols.toFixed(2));
+            // Purely visual feedback during the gesture — a smooth scale,
+            // not a fractional column count (which CSS repeat() can't render).
+            const liveScale = Math.min(1.6, Math.max(0.6, ratio));
+            grid.style.transform = `scale(${liveScale})`;
 
             e.preventDefault();
         }, { passive: false });
 
-        const endPinch = () => {
+        const endPinch = (e) => {
             if (!pinching) return;
             pinching = false;
 
-            const currentCols = parseFloat(getComputedStyle(grid).getPropertyValue('--grid-cols'));
-            const snapped = Math.min(MAX_COLS, Math.max(MIN_COLS, Math.round(currentCols)));
+            // Figure out the final ratio from whichever touch data is available on release.
+            const touches = e.changedTouches && e.changedTouches.length === 2
+                ? e.changedTouches
+                : null;
+            const endDistance = touches ? getDistance(touches) : startDistance;
+            const ratio = endDistance / startDistance;
 
-            grid.style.transition = 'gap 0.15s ease';
-            grid.style.setProperty('--grid-cols', snapped);
+            // Spreading fingers apart (ratio > 1) = zoom in = fewer, bigger cards (down to 1).
+            // Pinching fingers together (ratio < 1) = zoom out = more, smaller cards (up to 5).
+            const newCols = Math.min(MAX_COLS, Math.max(MIN_COLS, Math.round(startCols / ratio)));
 
-            localStorage.setItem(STORAGE_KEY, snapped);
+            grid.style.transition = 'transform 0.2s ease';
+            grid.style.transform = 'scale(1)';
+            grid.style.setProperty('--grid-cols', newCols);
+
+            localStorage.setItem(STORAGE_KEY, newCols);
+
+            setTimeout(() => { grid.style.transition = ''; }, 200);
         };
 
         grid.addEventListener('touchend', endPinch);
