@@ -9,7 +9,7 @@
 
         <div class="simulator-page__frame">
             <iframe
-                src="{{ asset('games/' . $game->slug . '/simulator.html') }}"
+                src="{{ asset('game-assets/' . $game->slug . '/simulator.html') }}"
                 title="{{ $game->name }} combo simulator"
                 loading="lazy">
             </iframe>
