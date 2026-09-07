@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\LocationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,3 +17,4 @@ Route::get('/games/{game:slug}/cheat-sheet', [GameController::class, 'cheatSheet
 Route::get('/games/{game:slug}/simulator', [GameController::class, 'simulator'])->name('games.simulator');
 Route::get('/games/{game:slug}/comments', [GameController::class, 'comments'])->name('games.comments');
 Route::get('/games/{game:slug}/playfield', [GameController::class, 'playfield'])->name('games.playfield');
+Route::get('/locations/{location:slug}', [LocationController::class, 'show'])->name('locations.show');
