@@ -1,6 +1,6 @@
 <x-layouts.app>
     <div class="welcome-hero">
-        <h1>GF Pinball</h1>
+        <h1>GF Pinball (thats sum good fuckin pinball!)</h1>
         <p>Pick a location to see what's on the floor.</p>
     </div>
 
