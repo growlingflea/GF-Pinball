@@ -1,2 +1,2 @@
 //
-import './pinch-zoom-grid'; 
+import './pinch-zoom-grid';
