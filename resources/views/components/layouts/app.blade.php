@@ -7,12 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-<header class="site-header">
-    <a href="{{ url('/') }}" class="site-header__logo">GF-Pinball</a>
-    <nav class="site-header__nav">
-        <a href="{{ route('games.index') }}">Games</a>
-    </nav>
-</header>
+@include('partials.nav')
 
 <main>
     {{ $slot }}

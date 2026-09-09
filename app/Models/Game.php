@@ -18,4 +18,9 @@ class Game extends Model
             ->withPivot(['placed_at', 'removed_at'])
             ->withTimestamps();
     }
+
+    public function rulesheet(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(\App\Models\Rulesheet::class);
+    }
 }
