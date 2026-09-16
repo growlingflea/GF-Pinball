@@ -12,7 +12,7 @@
 <nav class="bg-white border-b border-gray-200">
     <div class="max-w-6xl mx-auto px-4">
         <div class="flex justify-between items-center h-16">
-            <a href="{{ route('games.index') }}" class="font-bold text-lg text-gray-800">
+            <a href="{{ url('/') }}" class="font-bold text-lg text-gray-800">
                 GF-Pinball
             </a>
 

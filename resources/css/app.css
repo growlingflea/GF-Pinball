@@ -194,3 +194,57 @@
     text-decoration: none;
     color: inherit;
 }
+
+/* Add to resources/css/app.css — matches the existing welcome-hero /
+   location-card convention already in use, no Tailwind utilities. */
+
+.location-search {
+    position: relative;
+    max-width: 28rem;
+    margin: 1.5rem auto 0;
+}
+
+.location-search__input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.location-search__results {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.5rem;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 10;
+    overflow: hidden;
+}
+
+.location-search__results.is-open {
+    display: block;
+}
+
+.location-search__result {
+    display: block;
+    padding: 0.65rem 1rem;
+    color: #1f2937;
+    text-decoration: none;
+}
+
+.location-search__result:hover {
+    background: #f3f4f6;
+}
+
+.location-search__empty {
+    padding: 0.75rem 1rem;
+    color: #9ca3af;
+    font-size: 0.875rem;
+    margin: 0;
+}

@@ -6,7 +6,9 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\RulesheetController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'locations' => \App\Models\Location::orderBy('name')->get(),
+    ]);
 });
 
 //Routes generate by ClaudeAI
