@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\LeagueMatchController;
+use App\Http\Controllers\LeaguePlayerController;
+use App\Http\Controllers\LeagueTeamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\LocationController;
@@ -33,3 +36,17 @@ Route::get('/locations', [LocationController::class, 'index'])->name('locations.
 Route::view('/simulators', 'coming-soon', ['feature' => 'Show Simulator'])->name('simulators.index');
 Route::view('/account', 'coming-soon', ['feature' => 'Account'])->name('account.index');
 Route::view('/about', 'coming-soon', ['feature' => 'About'])->name('about.index');
+
+// routes/web.php
+Route::prefix('league')->name('league.')->group(function () {
+    Route::get('/', [LeagueMatchController::class, 'index'])->name('index');
+    Route::get('/matches/create', [LeagueMatchController::class, 'create'])->name('matches.create');
+    Route::post('/matches', [LeagueMatchController::class, 'store'])->name('matches.store');
+    Route::get('/matches/{leagueMatch}/edit', [LeagueMatchController::class, 'edit'])->name('matches.edit');
+    Route::put('/matches/{leagueMatch}', [LeagueMatchController::class, 'update'])->name('matches.update');
+    Route::get('/matches/{leagueMatch}', [LeagueMatchController::class, 'show'])->name('matches.show');
+
+    // quick-add so dropdowns have data without a separate admin panel yet
+    Route::post('/teams', [LeagueTeamController::class, 'store'])->name('teams.store');
+    Route::post('/players', [LeaguePlayerController::class, 'store'])->name('players.store');
+});

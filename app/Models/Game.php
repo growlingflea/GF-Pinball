@@ -23,4 +23,9 @@ class Game extends Model
     {
         return $this->hasOne(\App\Models\Rulesheet::class);
     }
+
+    public function venues()
+    {
+        return $this->belongsToMany(Venue::class)->withPivot('pinball_map_lmx_id')->withTimestamps();
+    }
 }

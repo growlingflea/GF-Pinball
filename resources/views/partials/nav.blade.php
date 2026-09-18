@@ -1,5 +1,7 @@
 @php
     $navItems = [
+  //      ['route' => 'scoresheet.index', 'label' => 'Scoresheet'],
+        ['route' => 'league.index', 'label' => 'League'],
         ['route' => 'locations.index', 'label' => 'Locations'],
         ['route' => 'rulesheets.index', 'label' => 'Rulesheets'],
         ['route' => 'calendar.index', 'label' => 'Calendar'],
