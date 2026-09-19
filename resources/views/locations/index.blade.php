@@ -1,7 +1,7 @@
 <x-layouts.app>
     <x-slot name="title">Locations</x-slot>
 
-    <div class="max-w-3xl mx-auto px-4 py-8">
+    <div class="max-w-3xl mx-auto px-4 py-8 ">
         <h1 class="text-2xl font-bold mb-4">Locations</h1>
 
         <div class="mb-6">
@@ -13,10 +13,10 @@
             >
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 locations-index-header">
             @foreach ($locations as $location)
                 <a href="{{ route('locations.show', $location->slug) }}"
-                   class="block rounded-lg border border-gray-200 hover:shadow-md transition p-4">
+                   class="block rounded-lg border border-gray-400 hover:shadow-md transition p-4">
                     <h2 class="font-semibold text-lg">{{ $location->name }}</h2>
                     <p class="text-sm text-gray-500 mt-1">View machines on the floor &rarr;</p>
                 </a>

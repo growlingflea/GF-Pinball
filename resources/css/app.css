@@ -264,3 +264,14 @@ body {
     background-position: center center;
     background-attachment: fixed;
 }
+
+
+.locations-index-header {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.89), rgba(255, 255, 255, 0.89)),
+        url('../../public/images/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
