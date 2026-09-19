@@ -1,5 +1,6 @@
 {{-- resources/views/league/matches/show.blade.php --}}
 <x-layouts.app :title="$leagueMatch->homeTeam->name . ' vs ' . $leagueMatch->awayTeam->name">
+    <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6">
     <h1 class="text-xl font-bold mb-4">
         {{ $leagueMatch->homeTeam->name }} vs {{ $leagueMatch->awayTeam->name }}
         — {{ $leagueMatch->match_date->format('M j, Y') }}
@@ -41,4 +42,5 @@
         /
         <span class="{{ $matchTotal['away'] > $matchTotal['home'] ? 'text-green-600' : '' }}">Away {{ $matchTotal['away'] }}</span>
     </h2>
+    </div>
 </x-layouts.app>

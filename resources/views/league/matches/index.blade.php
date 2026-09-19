@@ -1,5 +1,5 @@
 <x-layouts.app title="League matches">
-    <div class="max-w-3xl mx-auto py-8">
+    <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-xl font-bold">League matches</h1>
             <a href="{{ route('league.matches.create') }}" class="text-blue-600 hover:underline">+ New match</a>
