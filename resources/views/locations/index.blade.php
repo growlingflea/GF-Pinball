@@ -13,10 +13,10 @@
             >
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 locations-index-header">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
             @foreach ($locations as $location)
                 <a href="{{ route('locations.show', $location->slug) }}"
-                   class="block rounded-lg border border-gray-400 hover:shadow-md transition p-4">
+                   class="block rounded-lg border border-gray-400 hover:shadow-md transition p-4 locations-index-header">
                     <h2 class="font-semibold text-lg">{{ $location->name }}</h2>
                     <p class="text-sm text-gray-500 mt-1">View machines on the floor &rarr;</p>
                 </a>
