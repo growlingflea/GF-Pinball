@@ -9,7 +9,7 @@
 
     <meta property="og:title" content="GF-Pinball">
     <meta property="og:description" content="Play Some Fuckin Pinball">
-    <meta property="og:image" content="{{ asset('images/topnav.jpg') }}">
+    <meta property="og:image" content="{{ asset('images/topnav.JPG') }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
 
